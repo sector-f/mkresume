@@ -1,0 +1,78 @@
+{
+	"header": {
+		"first_name": "John",
+		"last_name": "Doe",
+		"job_title": "Jack of all Trades",
+		"location": "Silicon Valley, CA",
+		"email": {
+			"display": "johndoe@example.com",
+			"link": "mailto:johndoe@example.com"
+		},
+		"github": {
+			"display": "johndoe",
+			"link": "https://example.com/github/johndoe"
+		}
+	},
+	"experience": [
+		{
+			"company": "Cool Software Company",
+			"job_title": "Software Engineer",
+			"location": "Mountain View, CA",
+			"time": "February 2019--Present",
+			"bullets": [
+				"Write lots of enterprise code",
+				"Get paid lots of money",
+				"Fix stuff when it breaks"
+			]
+		},
+		{
+			"company": "Small Local Company",
+			"job_title": "Technical Support Engineer",
+			"location": "Kansas City, MO",
+			"time": "September 2016--January 2019",
+			"bullets": [
+				"Did the jobs of 4 people",
+				"Got lots of great experience",
+				"Had to email customers sometimes"
+			]
+		}
+	],
+	"skills": [
+		{
+			"heading": "Programming Languages",
+			"description": "JavaScript, Python, Node, Visual Basic"
+		},
+		{
+			"heading": "Operating Systems",
+			"description": "Windows 7, Windows 10, Windows Server, macOS"
+		},
+		{
+			"heading": "Relational (SQL) Databases",
+			"description": "MySQL, MariaDB, Oracle, SQL Server"
+		}
+	],
+	"projects": [
+		{
+			"name":  "cool-web-app",
+			"description": "some really cool webapp that shows employers how great I am at fullstack dev",
+			"url": "https://example.com/github/johndoe/cool-web-app"
+		},
+		{
+			"name":  "project-from-school",
+			"description": "some project I did a decade ago that might have been impressive when I was 17",
+			"url": "https://example.com/github/johndoe/project-from-school"
+		}
+	],
+	"education": [
+		{
+			"name": "B.S. Computer Science",
+			"institution": "University of California, Berkeley",
+			"date": "2016"
+		},
+		{
+			"name": "High School Diploma",
+			"institution": "Some Random High School",
+			"date": "2012"
+		}
+	]
+}

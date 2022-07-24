@@ -1,0 +1,94 @@
+% Example LaTeX resume template for use with mkresume
+
+\documentclass{article}
+\usepackage[top=0.5in, bottom=0.5in, left=1in, right=1in]{geometry}
+\usepackage{enumitem}
+\usepackage[colorlinks=true, urlcolor=blue]{hyperref}
+\usepackage{titlesec}
+\usepackage{fontawesome}
+
+\RequirePackage{titlesec}
+
+\titleformat{\section}         % Customise the \section command
+  {\Large\scshape\raggedright} % Make the \section headers large (\Large),
+                               % small capitals (\scshape) and left aligned (\raggedright)
+  {}{0em}                      % Can be used to give a prefix to all sections, like 'Section ...'
+  {}                           % Can be used to insert code before the heading
+[\titlerule]                   % Inserts a horizontal line after the heading
+
+\titleformat{\subsection}
+	{\large\scshape\raggedright}
+	{}{0em}
+	{}
+
+\newcommand{\datedsubsection}[2]{%
+  \subsection[#1]{\textbf{#1} \hfill #2}%
+}
+
+\newcommand{\name}{
+  {{ printf "{%s %s - %s}\n" .Header.FirstName .Header.LastName .Header.JobTitle }}
+}
+
+\newcommand{\location}{
+  {{ printf "\\faHome \\hspace{3pt}{%s}" .Header.Location }}
+}
+
+\newcommand{\email}{
+  {{ printf "\\faEnvelopeO \\hspace{3pt}\\href{%s}{%s}" .Header.Email.Link .Header.Email.Display }}
+}
+
+\newcommand{\github}{
+  {{ printf "\\faGithub \\hspace{3pt}\\href{%s}{%s}" .Header.Github.Link .Header.Github.Display }}
+}
+
+\newcommand{\info}{
+  \location
+  \hspace{2pt}{\normalsize\textbullet}\hspace{1pt}
+  \email
+  \hspace{2pt}{\normalsize\textbullet}\hspace{1pt}
+  \github
+}
+
+\titlespacing*{\subsection}{0pt}{\baselineskip}{2pt}
+
+\begin{document}
+
+\begin{center}
+{\huge \name}
+\info
+\end{center}
+
+\section{Work History}
+{{ range .Experience }}
+{{ printf "\\datedsubsection{{%s}}{%s}\n" .Name .Time }}
+{{ printf "\\textit{%s}\n" .JobTitle -}}
+\begin{itemize}[noitemsep]
+\vspace{-0.5\baselineskip}
+{{ range .Bullets }}
+  \item {{ . }}
+{{ end }}
+\end{itemize}
+{{ end }}
+
+\section{Primary Skills}
+\begin{itemize}[leftmargin=*]
+{{ range .Skills }}
+	{{ printf "\\item \\textbf{%s}: %s\n" .Heading .Description }}
+{{ end }}
+\end{itemize}
+
+\section{Education}
+{{ range .Education }}
+{{ printf "\\datedsubsection{%s}{%s}\n" .Name .Date }}
+{{ printf "\\textit{%s}\n" .Institution }}
+{{ end }}
+
+\section{Personal Projects}
+\begin{itemize}[leftmargin=*]
+{{ range .Projects}}
+{{ if .Hide }}{{continue}}{{ end }}
+{{ printf "\\item \\textbf{%s}, %s \\url{%s}" .Name .Description .Url }}
+{{ end }}
+\end{itemize}
+
+\end{document}

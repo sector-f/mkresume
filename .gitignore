@@ -1,0 +1,9 @@
+mkresume
+resume.json
+
+*.pdf
+!example.pdf
+!example_redacted.pdf
+
+*.tex.tmpl
+!resume.tex.tmpl
