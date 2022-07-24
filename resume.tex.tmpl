@@ -61,7 +61,7 @@
 \section{Work History}
 {{ range .Experience }}
 {{ printf "\\datedsubsection{{%s}}{%s}\n" .Name .Time }}
-{{ printf "\\textit{%s}\n" .JobTitle -}}
+{{ printf "\\textit{%s}\\hfill{%s}\n" .JobTitle .Location -}}
 \begin{itemize}[noitemsep]
 \vspace{-0.5\baselineskip}
 {{ range .Bullets }}
