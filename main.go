@@ -26,6 +26,8 @@ func main() {
 	templateFilename := pflag.StringP("template", "t", "", "Path to template file")
 	shouldRedact := pflag.BoolP("redact", "r", false, "Redact sensitive information in resume")
 
+	shouldShowDefault := pflag.BoolP("show-default", "", false, "Print default template contents to stdout")
+
 	shouldHelp := pflag.BoolP("help", "h", false, "Display help message")
 	pflag.CommandLine.MarkHidden("help")
 
@@ -33,6 +35,11 @@ func main() {
 
 	if *shouldHelp {
 		pflag.PrintDefaults()
+		os.Exit(0)
+	}
+
+	if *shouldShowDefault {
+		fmt.Print(defaultTemplate)
 		os.Exit(0)
 	}
 
