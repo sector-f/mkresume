@@ -1,5 +1,7 @@
 mkresume
 resume.json
+resume.toml
+
 
 *.pdf
 !example.pdf

@@ -25,9 +25,9 @@ func (r *Resume) redact() {
 }
 
 type Header struct {
-	FirstName string `json:"first_name"`
-	LastName  string `json:"last_name"`
-	JobTitle  string `json:"job_title"`
+	FirstName string `json:"first_name" toml:"first_name"`
+	LastName  string `json:"last_name" toml:"last_name"`
+	JobTitle  string `json:"job_title" toml:"job_title"`
 	Location  string
 	Email     Link
 	Github    Link
@@ -40,8 +40,8 @@ type Link struct {
 }
 
 type Company struct {
-	Name     string `json:"company"`
-	JobTitle string `json:"job_title"`
+	Name     string `json:"company" toml:"company"`
+	JobTitle string `json:"job_title" toml:"job_title"`
 	Location string
 	Time     string
 	Bullets  []string

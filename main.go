@@ -7,8 +7,11 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"path/filepath"
+	"strings"
 	"text/template"
 
+	"github.com/BurntSushi/toml"
 	"github.com/rwestlund/gotex"
 	"github.com/spf13/pflag"
 )
@@ -20,7 +23,7 @@ var defaultTemplate string
 var defaultOutputFilename string = "output.pdf"
 
 func main() {
-	inputFilename := pflag.StringP("input", "i", "resume.json", "Resume JSON input filename")
+	inputFilename := pflag.StringP("input", "i", "resume.json", "Resume input filename")
 	outputFilename := pflag.StringP("output", "o", defaultOutputFilename, "Output PDF filename")
 	texCommand := pflag.StringP("command", "c", "xelatex", "TeX command")
 	templateFilename := pflag.StringP("template", "t", "", "Path to template file")
@@ -50,9 +53,18 @@ func main() {
 	}
 
 	var r Resume
-	err = json.Unmarshal(data, &r)
+
+	// Default to unmarshalling as JSON
+	var unmarshalFunc func([]byte, interface{}) error = json.Unmarshal
+
+	// Unmarshal as TOML if the file extension is "toml"
+	if filepath.Ext(strings.ToLower(*inputFilename)) == ".toml" {
+		unmarshalFunc = toml.Unmarshal
+	}
+
+	err = unmarshalFunc(data, &r)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error parsing JSON: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error parsing file: %v\n", err)
 		os.Exit(1)
 	}
 
